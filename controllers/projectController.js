@@ -4,27 +4,10 @@ const projects = require("../models/projectModel");
 
 exports.addProjectController = async (req, res) => {
   console.log("Inside add Project Function");
-  const { title,languages,overview,github,website } = req.body;
+  const { title,category,overview,website } = req.body;
   const userId=req.payload
   const projectImg=req.file.filename
-  console.log(title,languages,overview,github,website,userId,projectImg);
-
-try{
-  const existingProject=await projects.findOne({github})
-  if(existingProject){
-    res.status(406).json("Project already in our database... Add Another one!!")
-  }else{
-    const newProject = new projects({
-      title,languages,overview,github,website,projectImg,userId
-    })
-    await newProject.save()
-    res.status(200).json(newProject)
-  }
-
-}catch(err){
-  res.status(401).json(err)
-
-}
+  console.log(title,category,overview,website,userId,projectImg);
 
 };
 
@@ -44,7 +27,7 @@ exports.allProjectsController = async (req,res) => {
   console.log("Inside allProjects");
   const searchKey = req.query.search
   const query = {
-    languages:{
+    category:{
       $regex:searchKey,
       $options:"i"
     }
@@ -75,13 +58,13 @@ exports.getUserProjectsController = async (req,res) => {
 exports.editProjectController = async (req,res) => {
   console.log("Inside editProjectController");
   const {pid} = req.params
-  const {title,languages,overview,github,website,projectImg} = req.body
+  const {title,category,overview,website,projectImg} = req.body
   const uploadImg = req.file?req.file.filename:projectImg
   const userId = req.payload
 
   try{
     const updatedProject = await projects.findByIdAndUpdate({_id:pid},{
-      title,languages,overview,github,website,projectImg:uploadImg,userId
+      title,category,overview,website,projectImg:uploadImg,userId
     },{new:true})
     await updatedProject.save()
     res.status(200).json(updatedProject)

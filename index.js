@@ -12,7 +12,7 @@ pfServer.use(express.json())
 pfServer.use(router)
 pfServer.use('/uploads',express.static('./uploads'))
 
-const PORT = 3000 || process.env.PORT
+const PORT = 4005 || process.env.PORT
 
 pfServer.listen(PORT,()=>{
     console.log(`Project Fair Server started at port ${PORT}`);

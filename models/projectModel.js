@@ -5,7 +5,7 @@ const projectSchema = new mongoose.Schema({
     type:String,
     required:true
   },
-  languages :{
+  category :{
     type:String,
     required:true
   },
@@ -13,10 +13,9 @@ const projectSchema = new mongoose.Schema({
     type:String,
     required:true
   },
-  github :{
+  video :{
     type:String,
-    required:true,
-    unique:true
+    required:true
   },
   website :{
     type:String,

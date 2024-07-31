@@ -14,12 +14,6 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  github: {
-    type: String,
-  },
-  linkedin: {
-    type: String,
-  },
   profilePic: {
     type: String,
   },
